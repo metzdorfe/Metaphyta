@@ -1,0 +1,92 @@
+/* === RESET GERAL === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* === CONTAINER CENTRAL === */
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #f4f9f4, #d6f5d6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* === CARD PRINCIPAL === */
+.container {
+    background: #fff;
+    padding: 40px 45px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+/* === TÍTULO E TEXTO === */
+.container h2 {
+    font-size: 26px;
+    color: #2e7d32;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.container p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+/* === FORM === */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type="email"] {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+input[type="email"]:focus {
+    border-color: #43a047;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* === BOTÃO === */
+button {
+    background-color: #43a047;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #2e7d32;
+    transform: scale(1.03);
+}
+
+/* === LINK VOLTAR === */
+a {
+    display: inline-block;
+    margin-top: 18px;
+    color: #43a047;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}

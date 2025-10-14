@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/pgLogin.css' %}">
+    <!--<script src="{% static 'js/index.js' %}" defer></script>-->
+    <title>Metaphyta</title>
+</head>
+<body>
+
+    <div class="imgIndex">
+        <img src="{% static 'images/index_image_solo.jpeg' %}" alt="Imagem de destaque">
+    </div>
+
+    <div class="divRestPage">
+        <div class="logBox">
+            <img class="logoMeta" src="{% static 'images/logoMeta.png' %}" alt="Logo">
+
+            <form class="logForm" id="loginForm">
+                <div class="logCamp">
+                    <label for="cpf">CPF</label>
+                    <input id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14">
+                </div>
+                <div class="logCamp">
+                    <label for="password">Senha</label>
+                    <input id="senha" type="password" name="password" placeholder="Digite sua Senha">
+                </div>
+
+                <p class="txtEsqueceuSenha">
+                    <a href="recuperar_senha/">Esqueceu a senha?</a>
+                </p>
+            </form>
+
+            <div class="btns">
+                <button type="submit" id="btnLogar" class="btnLogar">Login</button>
+                <button type="button" id="btnCadastrar" class="btnCadastrar">Cadastrar-se</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+/* ====== Reset ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* fundo da tela de carregamento */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* sempre acima do conteúdo */
+    transition: opacity 0.5s ease;
+}
+
+/* Ocultar suavemente */
+#preloader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Logo animada */
+.preloader-logo {
+    width: 150px;
+    animation: spin 1.5s linear infinite;
+}
+
+/* Animação de rotação (opcional) */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ====== Estrutura geral ====== */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* agora o conteúdo fica um pouco abaixo do topo */
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+    padding-top: 60px; /* espaço pro título */
+}
+
+form {
+    position: relative; /* necessário para z-index funcionar */
+    background-color: #fff;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: fadeIn 0.6s ease-out;
+    z-index: 10; /* garante que fique acima do preloader quando animando */
+}
+
+form h1 {
+    align-self: center; /* centraliza horizontalmente */
+    margin-bottom: 20px; /* distância do restante do conteúdo */
+    color: #2b2b2b;
+}
+
+/* Container do tipo de conta */
+.tipoConta-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.tipoConta-container label {
+    font-weight: 500;
+    color: #2b2b2b;
+}
+
+/* Container dos botões */
+.tipoConta-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* Estilo dos botões */
+.tipo-btn {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 12px;
+    border: 2px solid #41A533;
+    background-color: #f8fff9;
+    color: #41A533;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover */
+.tipo-btn:hover {
+    background-color: #eafbe9;
+    transform: translateY(-2px);
+}
+
+/* Botão selecionado */
+.tipo-btn.selected {
+    background-color: #41A533;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(65, 165, 51, 0.4);
+}
+
+
+/* ====== Campos ====== */
+label {
+    font-weight: 500;
+    color: #2b2b2b;
+    font-size: 0.95rem;
+}
+
+input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #41A533;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+    font-size: 0.95rem;
+}
+
+input:focus {
+    border-color: #2E8B42;
+    box-shadow: 0 0 6px rgba(46, 139, 66, 0.3);
+}
+
+/* ====== Campo CREA ====== */
+#campoCREA {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+/* ====== Botão Avançar ====== */
+#btnAvancar {
+    background-color: #41A533;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#btnAvancar:hover {
+    background-color: #2E8B42;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(46, 139, 66, 0.3);
+}
+
+/* ====== Animações ====== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
