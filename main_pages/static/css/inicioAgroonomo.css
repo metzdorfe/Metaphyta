@@ -1,0 +1,163 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    overflow: hidden;
+}
+
+/* ===== SIDEBAR ===== */
+#sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+#sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    background-color: #41A533;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #2E8B42;
+}
+
+.sidebar-header h2 {
+    font-size: 1.4rem;
+}
+
+.sidebar-header p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.menu {
+    list-style: none;
+    padding: 15px 0;
+}
+
+.menu li {
+    margin: 8px 0;
+}
+
+.menu a {
+    display: block;
+    color: #2b2b2b;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-left: 4px solid transparent;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background-color: #eafbe9;
+    border-left: 4px solid #41A533;
+    color: #41A533;
+}
+
+.logout {
+    color: #d32f2f !important;
+}
+
+/* ===== CONTENT ===== */
+#content {
+    flex: 1;
+    padding: 30px;
+    width: 100%;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease;
+}
+
+#sidebar.active + #content {
+    margin-left: 250px;
+}
+
+/* ===== HEADER ===== */
+header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+#menu-btn {
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2b2b2b;
+}
+
+h1 {
+    color: #2b2b2b;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* ===== MAIN ===== */
+main h2 {
+    color: #41A533;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+/* Notificações */
+.notificacao {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    border: 1.5px solid #41A533;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.notificacao .icone {
+    font-size: 1.6rem;
+    color: #41A533;
+}
+
+.notificacao p {
+    color: #2b2b2b;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Botão */
+.btn {
+    background-color: #41A533;
+    color: white;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2E8B42;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(46, 139, 66, 0.3);
+}
