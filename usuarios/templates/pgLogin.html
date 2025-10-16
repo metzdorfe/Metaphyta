@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/pgLogin.css' %}">
-    <!--<script src="{% static 'js/index.js' %}" defer></script>-->
     <title>Metaphyta</title>
 </head>
 <body>
@@ -19,25 +18,37 @@
         <div class="logBox">
             <img class="logoMeta" src="{% static 'images/logoMeta.png' %}" alt="Logo">
 
-            <form class="logForm" id="loginForm">
+            <!-- Formulário de login -->
+            <form class="logForm" id="loginForm" method="POST" action="">
+                {% csrf_token %}
                 <div class="logCamp">
                     <label for="cpf">CPF</label>
-                    <input id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14">
+                    <input id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
                 </div>
                 <div class="logCamp">
-                    <label for="password">Senha</label>
-                    <input id="senha" type="password" name="password" placeholder="Digite sua Senha">
+                    <label for="senha">Senha</label>
+                    <input id="senha" type="password" name="senha" placeholder="Digite sua Senha" required>
                 </div>
 
                 <p class="txtEsqueceuSenha">
                     <a href="recuperar_senha/">Esqueceu a senha?</a>
                 </p>
+
+                <div class="btns">
+                    <button type="submit" id="btnLogar" class="btnLogar">Login</button>
+                    <button type="button" id="btnCadastrar" class="btnCadastrar" onclick="window.location.href='cadastro/'">Cadastrar-se</button>
+                </div>
             </form>
 
-            <div class="btns">
-                <button type="submit" id="btnLogar" class="btnLogar">Login</button>
-                <button type="button" id="btnCadastrar" class="btnCadastrar">Cadastrar-se</button>
-            </div>
+            <!-- Exibição de mensagens -->
+            {% if messages %}
+                <div class="mensagens">
+                    {% for message in messages %}
+                        <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
         </div>
     </div>
 
