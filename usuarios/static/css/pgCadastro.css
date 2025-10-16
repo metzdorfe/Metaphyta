@@ -25,6 +25,7 @@
 #preloader.hidden {
     opacity: 0;
     pointer-events: none;
+    display: none; /* garante que desapareça completamente */
 }
 
 /* Logo animada */
