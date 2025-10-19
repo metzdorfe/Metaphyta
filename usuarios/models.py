@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
 
 class UsuarioProdutor(models.Model):
-    cpf = models.CharField(primary_key=True, max_length=14)
+    cpf = models.CharField(primary_key=True, max_length=11)
     nome = models.CharField(max_length=100)
     sobrenome = models.CharField(max_length=100)
     data_nascimento = models.DateField()
@@ -16,7 +16,7 @@ class UsuarioProdutor(models.Model):
     def __str__(self):
         return f"{self.nome} {self.sobrenome}"
 
-    # Criptografa a senha antes de salvar
+    # hash
     def set_senha(self, senha_plana):
         self.senha = make_password(senha_plana)
 
@@ -29,7 +29,7 @@ class UsuarioAgronomo(models.Model):
     num_crea = models.CharField(primary_key=True, max_length=20)
     nome = models.CharField(max_length=100)
     sobrenome = models.CharField(max_length=100)
-    cpf = models.CharField(max_length=14, unique=True)
+    cpf = models.CharField(max_length=11, unique=True)
     data_nascimento = models.DateField()
     email = models.EmailField(unique=True)
     senha = models.CharField(max_length=255)

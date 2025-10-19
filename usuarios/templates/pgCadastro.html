@@ -14,12 +14,10 @@
         <img src="{% static 'images/logoMeta.png' %}" alt="Carregando..." class="preloader-logo">
     </div>
 
-    <!-- Formulário de cadastro -->
     <form id="form-cadastro" method="POST" action="">
         {% csrf_token %}
         <h1>Criar Cadastro</h1>
 
-        <!-- Tipo de conta -->
         <div class="tipoConta-container">
             <label>Tipo de Conta:</label>
             <div class="tipoConta-buttons">
@@ -29,9 +27,8 @@
             <input type="hidden" id="tipoConta" name="tipoConta">
         </div>
 
-        <!-- Campos do formulário -->
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome">
 
         <label for="sobrenome">Sobrenome:</label>
         <input type="text" id="sobrenome" name="sobrenome" required placeholder="Digite seu sobrenome">
@@ -48,25 +45,19 @@
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" required placeholder="E-mail">
 
-        <!-- CREA aparece apenas para agrônomo -->
         <div id="campoCREA" style="display: none;">
             <label for="num_crea">CREA:</label>
-            <input type="text" id="num_crea" name="num_crea" placeholder="CREA">
+            <input type="text" id="num_crea" name="num_crea" placeholder="CREA" maxlength="15">
         </div>
 
         <label for="senha">Senha:</label>
         <input type="password" id="senha" name="senha" required placeholder="Senha">
-        <span class="txtOrientacaoSenha">
-            A senha deve conter no mínimo 8 dígitos, letras maiúsculas e minúsculas, números e caracteres especiais ( !, @, #, $, % )
-        </span>
 
         <label for="confirmarSenha">Confirmar Senha:</label>
         <input type="password" id="confirmarSenha" name="confirmarSenha" required placeholder="Confirme sua senha">
-        <span class="confirmarSenha">As senhas devem ser iguais para prosseguir!</span>
 
         <button type="submit" id="btnAvancar">Avançar</button>
 
-        <!-- Mensagens de sucesso/erro -->
         {% if messages %}
             <div class="mensagens">
                 {% for message in messages %}

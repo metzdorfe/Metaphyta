@@ -152,3 +152,53 @@ body {
     background-color: #41A533;
     color: #fff;
 }
+
+/* ===== MENSAGENS DE LOGIN ===== */
+.mensagens {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Estilo base das mensagens */
+.mensagens p {
+    width: 80%;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Mensagem de erro */
+.mensagens p.error {
+    background-color: #ffe5e5;
+    color: #c70000;
+    border: 1px solid #ff9e9e;
+}
+
+/* Mensagem de sucesso */
+.mensagens p.success {
+    background-color: #e6ffed;
+    color: #007d2f;
+    border: 1px solid #9affb4;
+}
+
+/* Mensagem de aviso */
+.mensagens p.warning {
+    background-color: #fff8e1;
+    color: #a68b00;
+    border: 1px solid #ffec8b;
+}
+
+/* Animação suave de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Agrônomo</title>
-    <link rel="stylesheet" href="/main_pages/static/css/inicioAgroonomo.css">
+    <link rel="stylesheet" href="/main_pages/static/css/inicioAgronomo.css">
 </head>
 <body>
 
@@ -12,15 +12,15 @@
     <nav id="sidebar">
         <div class="sidebar-header">
             <h2></h2>
-            <p>Bem-vindo, Renato</p>
+            <p>Bem-vindo, {{ usuario.nome }}</p>
         </div>
         <ul class="menu">
-            <li><a href="#">🏠 Início</a></li>
-            <li><a href="#">👨‍🌾 Perfil</a></li>
-            <li><a href="#">📋 Clientes</a></li>
-            <li><a href="#">🌱 Propriedades</a></li>
-            <li><a href="#">📊 Relatórios</a></li>
-            <li><a href="#">⚙️ Configurações</a></li>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Clientes</a></li>
+            <li><a href="#">Propriedades</a></li>
+            <li><a href="#">Relatórios</a></li>
+            <li><a href="#">Configurações</a></li>
             <li><a href="#" class="logout">🚪 Sair</a></li>
         </ul>
     </nav>
@@ -34,20 +34,6 @@
 
         <main>
             <h2>Principais Notificações</h2>
-
-            <div class="notificacao">
-                <div class="icone">🔔</div>
-                <p>
-                    A análise da propriedade <strong>Fazenda Santo Antônio</strong> vencerá em uma semana!
-                </p>
-            </div>
-
-            <div class="notificacao">
-                <div class="icone">✅</div>
-                <p>
-                    17/02 — Nova propriedade de <strong>Pedro Campos</strong> cadastrada!
-                </p>
-            </div>
 
             <button class="btn">Ver Lista de Clientes</button>
         </main>
