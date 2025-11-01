@@ -1,17 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import UsuarioProdutor, UsuarioAgronomo
+from django.contrib.auth import authenticate, login
 
 def login(request):
     if request.method == 'POST':
-        # Recebe e limpa os dados do form
         cpf = request.POST.get('cpf', '').strip()
         senha = request.POST.get('senha', '').strip()
         cpf = ''.join(filter(str.isdigit, cpf))  # remove tudo que não for número
 
         if not cpf or not senha:
             messages.error(request, 'Preencha todos os campos.')
-            return render(request, 'pgLogin.html')
+            return render(request, 'login.html')
 
         # Autenticação PRODUTOR
         try:
@@ -21,10 +21,10 @@ def login(request):
                 request.session['usuario_cpf'] = produtor.cpf
                 request.session['usuario_nome'] = produtor.nome
                 messages.success(request, f'Bem-vindo, {produtor.nome}!')
-                return redirect('/pagina_inicial_produtor/')  # usa path, não arquivo .html
+                return redirect('/pagina_inicial_produtor/')
             else:
                 messages.error(request, 'Senha incorreta.')
-                return render(request, 'pgLogin.html')
+                return render(request, 'login.html')
         except UsuarioProdutor.DoesNotExist:
             pass  # tenta como agrônomo
 
@@ -39,12 +39,12 @@ def login(request):
                 return redirect('/pagina_inicial_agronomo/')
             else:
                 messages.error(request, 'Senha incorreta.')
-                return render(request, 'pgLogin.html')
+                return render(request, 'login.html')
         except UsuarioAgronomo.DoesNotExist:
             messages.error(request, 'CPF não encontrado em nenhum cadastro.')
-            return render(request, 'pgLogin.html')
+            return render(request, 'login.html')
 
-    return render(request, 'pgLogin.html')
+    return render(request, 'login.html')
 
 def cadastro(request):
     if request.method == 'POST':
@@ -59,17 +59,30 @@ def cadastro(request):
         confirmar_senha = request.POST.get('confirmarSenha', '').strip()
         num_crea = request.POST.get('num_crea', '').strip()
 
-        # Verifica se as senhas coincidem
+        # Senhas diferentes
         if senha != confirmar_senha:
             messages.error(request, "As senhas não coincidem.")
-            return render(request, 'pgCadastro.html')
+            return render(request, 'cadastro.html', {'limpar_form': True})
 
-        # Cadastro PRODUTOR
+        # Nenhum tipo de conta selecionado
+        if not tipo:
+            messages.error(request, "Selecione um tipo de conta.")
+            return render(request, 'cadastro.html', {'limpar_form': True})
+
+        # PRODUTOR
         if tipo == 'Produtor':
-            if UsuarioProdutor.objects.filter(cpf=cpf).exists():
-                messages.error(request, "CPF já cadastrado.")
-                return render(request, 'pgCadastro.html')
+            # Verifica duplicidade global (em ambas as tabelas)
+            if (UsuarioProdutor.objects.filter(cpf=cpf).exists() or
+                UsuarioAgronomo.objects.filter(cpf=cpf).exists()):
+                messages.error(request, "CPF já cadastrado no sistema.")
+                return render(request, 'cadastro.html', {'limpar_form': True})
 
+            if (UsuarioProdutor.objects.filter(email=email).exists() or
+                UsuarioAgronomo.objects.filter(email=email).exists()):
+                messages.error(request, "E-mail já cadastrado no sistema.")
+                return render(request, 'cadastro.html', {'limpar_form': True})
+
+            # Criação
             produtor = UsuarioProdutor(
                 cpf=cpf,
                 nome=nome,
@@ -80,15 +93,34 @@ def cadastro(request):
             )
             produtor.set_senha(senha)
             produtor.save()
-            messages.success(request, "Cadastro de produtor realizado com sucesso!")
-            return redirect('/')
 
-        # Cadastro AGRÔNOMO
+            user = authenticate(request, email=email, password=senha)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Cadastro de produtor realizado com sucesso!")
+                return redirect('/pagina_inicial_produtor')
+            else:
+                messages.warning(request, "Cadastro realizado, mas não foi possível autenticar automaticamente.")
+                return redirect('/')
+
+        # AGRÔNOMO
         elif tipo == 'Agronomo':
+            # Verifica duplicidade global (CREA, CPF, e e-mail)
             if UsuarioAgronomo.objects.filter(num_crea=num_crea).exists():
                 messages.error(request, "CREA já cadastrado.")
-                return render(request, 'pgCadastro.html')
+                return render(request, 'cadastro.html', {'limpar_form': True})
 
+            if (UsuarioAgronomo.objects.filter(cpf=cpf).exists() or
+                UsuarioProdutor.objects.filter(cpf=cpf).exists()):
+                messages.error(request, "CPF já cadastrado no sistema.")
+                return render(request, 'cadastro.html', {'limpar_form': True})
+
+            if (UsuarioAgronomo.objects.filter(email=email).exists() or
+                UsuarioProdutor.objects.filter(email=email).exists()):
+                messages.error(request, "E-mail já cadastrado no sistema.")
+                return render(request, 'cadastro.html', {'limpar_form': True})
+
+            # Criação
             agronomo = UsuarioAgronomo(
                 num_crea=num_crea,
                 cpf=cpf,
@@ -100,15 +132,23 @@ def cadastro(request):
             )
             agronomo.set_senha(senha)
             agronomo.save()
-            messages.success(request, "Cadastro de agrônomo realizado com sucesso!")
-            return redirect('/')
+
+            user = authenticate(request, email=email, password=senha)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Cadastro de agrônomo realizado com sucesso!")
+                return redirect('/pagina_inicial_agronomo')
+            else:
+                messages.warning(request, "Cadastro realizado, mas não foi possível autenticar automaticamente.")
+                return redirect('/login')
 
         else:
-            messages.error(request, "Selecione um tipo de conta.")
-            return render(request, 'pgCadastro.html')
+            messages.error(request, "Tipo de conta inválido.")
+            return render(request, 'cadastro.html', {'limpar_form': True})
 
-    return render(request, 'pgCadastro.html')
+    # GET
+    return render(request, 'cadastro.html')
 
-
+# RECUPERAÇÃO DE SENHA
 def recSenha(request):
-    return render(request, 'recSenha.html')
+    return render(request, 'recuperarSenha.html')

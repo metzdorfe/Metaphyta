@@ -1,0 +1,268 @@
+:root {
+  --green: #41A533;
+  --green-light: #65c257;
+  --bg: #f6f9f6;
+  --white: #ffffff;
+  --text: #1e1e1e;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Corpo da página */
+.dashboard-body {
+  background: var(--bg);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+  width: 260px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-sidebar {
+  width: 120px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  background: var(--bg);
+  color: var(--green);
+}
+
+.nav-link.active {
+  background: var(--green-light);
+  color: var(--white);
+}
+
+.nav-link i {
+  font-size: 1.2rem;
+}
+
+.nav-link.logout {
+  margin-top: auto;
+}
+
+.nav-link.logout:hover {
+  color: #b54141;
+}
+
+/* === CONTEÚDO PRINCIPAL === */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+/* Cabeçalho */
+.main-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--text);
+}
+
+#nomeAgronomo {
+  font-weight: 700;
+  color: var(--green);
+  opacity: 90%;
+}
+
+.main-header p {
+  color: #777;
+  font-size: 1.1rem;
+}
+
+/* === ALERTAS DE FEEDBACK === */
+#alert-container {
+  margin-top: 20px;
+}
+
+/* === SEÇÃO DE NOTIFICAÇÕES === */
+.notifications-section {
+  margin-top: 40px;
+}
+
+.notifications-section h2 {
+  color: var(--green);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#containerNotificacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-card {
+  background: var(--white);
+  border-left: 5px solid var(--green-light);
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.notification-card p {
+  margin: 0;
+  color: var(--text);
+}
+
+.notification-time {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 5px;
+  display: block;
+}
+
+/* === SEÇÃO DE CLIENTES === */
+.clients-section {
+  margin-top: 40px;
+}
+
+.clients-section h2 {
+  color: var(--green);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Grid de clientes */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* Card de cliente */
+.client-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.client-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.client-photo {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.client-info {
+  padding: 20px;
+}
+
+.client-info h3 {
+  margin: 0 0 5px 0;
+  color: var(--text);
+}
+
+.client-info p {
+  color: #777;
+  margin: 0 0 15px 0;
+}
+
+/* Botão dentro do card */
+.btn-card {
+  background: var(--green);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: 0.2s;
+}
+
+.btn-card:hover {
+  background: #276131;
+}
+
+/* Card de adicionar novo cliente */
+.add-new-card {
+  border: 3px dashed #cfe3cf;
+  background: transparent;
+  box-shadow: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #a0a0a0;
+  min-height: 280px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+}
+
+.add-new-card:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: #f6f9f6;
+}
+
+.add-new-content {
+  text-align: center;
+}
+
+.add-new-content i {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.add-new-content p {
+  font-weight: 600;
+  font-size: 1.1rem;
+}

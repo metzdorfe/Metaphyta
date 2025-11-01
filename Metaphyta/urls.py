@@ -20,14 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # App de usuários (login, cadastro, etc.)
     path('', include('usuarios.urls')),
-    path('cadastro/', include('usuarios.urls')),
-    path('recuperar_senha/', include('usuarios.urls')),
-    
-    
-    path('pagina_inicial_produtor/', include('main_pages.urls')),
-    path('pagina_inicial_agronomo/', include('main_pages.urls')),
-    path('perfil_produtor/', include('main_pages.urls')),
-    path('perfil_agronomo/', include('main_pages.urls')),
 
+    # App de páginas principais (áreas protegidas)
+    path('', include('main_pages.urls')),
 ]

@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/pgLogin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>Metaphyta</title>
-    <script src="{% static 'js/pgLogin.js' %}" defer></script>
+    <script src="{% static 'js/login.js' %}" defer></script>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
         <img class="logoMeta" src="{% static 'images/logoMeta.png' %}" alt="Logo">
 
         <!-- Formulário de login -->
-        <form class="logForm" id="loginForm" method="POST" action="">
+        <form class="logForm" id="loginForm" method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="logCamp">
                 <label for="cpf">CPF</label>

@@ -1,64 +1,72 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from usuarios.models import Perfil
+from usuarios.models import UsuarioAgronomo, UsuarioProdutor  # importa do teu app de login
 
-# Redireciona para a página correta se já estiver logado
-def home_redirect(request):
-    if request.user.is_authenticated:
-        perfil = Perfil.objects.get(usuario=request.user)
-        if perfil.tipo_conta == 'Produtor':
-            return redirect('inicioProdutor')
-        else:
-            return redirect('inicioAgronomo')
-    return redirect('login')
+def pagina_inicial_agronomo(request):
+    # Verifica se o usuário logado é agrônomo
+    if request.session.get('usuario_tipo') != 'agronomo':
+        messages.error(request, "Acesso restrito a contas de agrônomo.")
+        return redirect('/')
 
-# Login
-def login_view(request):
-    if request.method == 'POST':
-        cpf = request.POST['cpf']
-        senha = request.POST['senha']
+    crea = request.session.get('usuario_crea')
+    try:
+        agronomo = UsuarioAgronomo.objects.get(num_crea=crea)
+    except UsuarioAgronomo.DoesNotExist:
+        messages.error(request, "Agrônomo não encontrado.")
+        return redirect('/')
 
-        try:
-            perfil = Perfil.objects.get(cpf=cpf)
-            user = perfil.usuario
-        except Perfil.DoesNotExist:
-            messages.error(request, 'CPF não cadastrado')
-            return redirect('login')
+    # clientes = UsuarioProdutor.objects.filter(agronomo_relacionado=agronomo)
+    # Por enquanto, exemplo fixo:
+    clientes = [
+        #{"nome": "Carlos Almeida", "propriedade": "Fazenda Boa Esperança"},
+        #{"nome": "Fernanda Souza", "propriedade": "Sítio Primavera"},
+    ]
 
-        user_auth = authenticate(request, username=user.username, password=senha)
-        if user_auth:
-            login(request, user_auth)
-            if perfil.tipo_conta == 'Produtor':
-                return redirect('inicioProdutor')
-            else:
-                return redirect('inicioAgronomo')
-        else:
-            messages.error(request, 'Senha incorreta')
-            return redirect('login')
+    # Simulação de notificações (depois pode vir do banco)
+    notificacoes = [
+        #{"texto": "Cliente Carlos enviou uma nova solicitação de análise.", "tempo": "Há 2 horas"},
+        #{"texto": "Relatório de campo atualizado com sucesso.", "tempo": "Ontem, 14:22"},
+    ]
 
-    return render(request, 'pgLogin.html')
+    context = {
+        "nome": agronomo.nome,
+        "sobrenome": agronomo.sobrenome,
+        "clientes": clientes,
+        "notificacoes": notificacoes,
+    }
 
-# Logout
-def logout_view(request):
-    logout(request)
-    return redirect('login')
+    return render(request, "indexAgronomo.html", context)
 
-# Páginas iniciais protegidas
-@login_required(login_url='login')
-def inicioProdutor(request):
-    return render(request, 'pagina_inicial_produtor.html')
+def pagina_inicial_produtor(request):
+    # Verifica se o usuário logado é produtor
+    if request.session.get('usuario_tipo') != 'produtor':
+        messages.error(request, "Acesso restrito a contas de produtor.")
+        return redirect('/')
 
-@login_required(login_url='login')
-def inicioAgronomo(request):
-    return render(request, 'pagina_inicial_agronomo.html')
+    cpf = request.session.get('usuario_cpf')
+    try:
+        produtor = UsuarioProdutor.objects.get(cpf=cpf)
+    except UsuarioProdutor.DoesNotExist:
+        messages.error(request, "Produtor não encontrado.")
+        return redirect('/')
 
-# Perfis protegidos
-@login_required(login_url='login')
-def perfilProdutor(request):
-    return render(request, 'perfil_produtor.html')
+    # Exemplo fixo de propriedades
+    propriedades = [
+        #{"nome": "Fazenda Boa Esperança", "local": "São Paulo"},
+        #{"nome": "Sítio Primavera", "local": "Minas Gerais"},
+    ]
 
-@login_required(login_url='login')
-def perfilAgronomo(request):
-    return render(request, 'perfil_agronomo.html')
+    # Exemplo fixo de notificações
+    notificacoes = [
+        #{"texto": "Nova análise disponível para sua propriedade.", "tempo": "Hoje, 10:30"},
+        #{"texto": "Atualização do clima enviada.", "tempo": "Ontem, 18:15"},
+    ]
+
+    context = {
+        "nome": produtor.nome,
+        "sobrenome": produtor.sobrenome,
+        "propriedades": propriedades,
+        "notificacoes": notificacoes,
+    }
+
+    return render(request, "indexProdutor.html", context)

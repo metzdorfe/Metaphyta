@@ -6,6 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form-cadastro');
     const cpfInput = document.getElementById('cpf');
     const telefoneInput = document.getElementById('telefone');
+    
+    // Preloaderperdão, te mandei o errado
+    window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500); // o mesmo tempo da transição do CSS
+    });
 
     // Alternância de tipo de conta
     btnAgronomo.addEventListener('click', () => {
@@ -71,8 +80,5 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.textContent = 'Enviando...';
     });
 
-    // Preloader
-    const preloader = document.getElementById('preloader');
-    preloader.style.opacity = '0';
-    setTimeout(() => { preloader.style.display = 'none'; }, 500);
+
 });
