@@ -3,7 +3,6 @@ from django.contrib import messages
 from usuarios.models import UsuarioAgronomo, UsuarioProdutor  # importa do teu app de login
 
 def pagina_inicial_agronomo(request):
-    # Verifica se o usuário logado é agrônomo
     if request.session.get('usuario_tipo') != 'agronomo':
         messages.error(request, "Acesso restrito a contas de agrônomo.")
         return redirect('/')
@@ -16,7 +15,6 @@ def pagina_inicial_agronomo(request):
         return redirect('/')
 
     # clientes = UsuarioProdutor.objects.filter(agronomo_relacionado=agronomo)
-    # Por enquanto, exemplo fixo:
     clientes = [
         #{"nome": "Carlos Almeida", "propriedade": "Fazenda Boa Esperança"},
         #{"nome": "Fernanda Souza", "propriedade": "Sítio Primavera"},
@@ -70,3 +68,6 @@ def pagina_inicial_produtor(request):
     }
 
     return render(request, "indexProdutor.html", context)
+
+def perfilAgronomo(request):
+    return render(request, 'perfilAgronomo.html')

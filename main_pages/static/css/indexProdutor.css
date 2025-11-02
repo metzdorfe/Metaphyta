@@ -1,167 +1,267 @@
+:root {
+  --green: #41A533;
+  --green-light: #65c257;
+  --bg: #f6f9f6;
+  --white: #ffffff;
+  --text: #1e1e1e;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-    background-color: #FFFFFF;
-    color: #333;
-    height: 100vh;
-    overflow-x: hidden;
+/* Corpo da página de dashboard */
+.dashboard-body {
+  background: var(--bg);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 100vh;
 }
 
-/* Header */
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #41A533;
-    color: white;
-    padding: 10px 20px;
-}
-
-.menu-btn {
-    font-size: 24px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-.logo-canto img {
-    height: 40px;
-}
-
-/* Sidebar retrátil */
+/* === SIDEBAR === */
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 220px;
-    height: 100%;
-    background-color: #2e7d32;
-    color: white;
-    transition: left 0.3s ease;
-    padding-top: 60px;
+  width: 260px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  flex-shrink: 0;
 }
 
-.sidebar.active {
-    left: 0;
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-.sidebar ul {
-    list-style: none;
+.logo-sidebar {
+  width: 120px;
 }
 
-.sidebar li {
-    padding: 15px 20px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.sidebar li:hover {
-    background-color: #369E40;
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
 }
 
-.sidebar li.active {
-    background-color: #41A533;
+.nav-link:hover {
+  background: var(--bg);
+  color: var(--green);
 }
 
-/* Layout principal */
-.conteudo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 60px);
-    gap: 40px;
-    padding: 20px;
+.nav-link.active {
+  background: var(--green-light);
+  color: var(--white);
 }
 
-/* Logo central */
-.logo-central {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.nav-link i {
+  font-size: 1.2rem;
 }
 
-.logo-central img {
-    max-width: 200px;
+.nav-link.logout {
+  margin-top: auto;
 }
 
-/* Coluna de propriedades */
-.coluna-propriedades {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.nav-link.logout:hover {
+  color: #b54141;
 }
 
-.propriedades {
-    background-color: #FFFFFF;
-    border: 2px solid #41A533;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 20px 25px;
-    width: 260px;
+/* === CONTEÚDO PRINCIPAL === */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  overflow-y: auto;
 }
 
-.titulo-prop {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+/* Cabeçalho do dashboard */
+.main-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--text);
 }
 
-.titulo-prop h2 {
-    color: #41A533;
-    font-size: 20px;
+#nomeProdutor {
+  font-weight: 700;
+  color: var(--green);
+  opacity: 90%;
 }
 
-.btn-add {
-    background-color: #41A533;
-    color: white;
-    border: none;
-    font-size: 22px;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.main-header p {
+  color: #777;
+  font-size: 1.1rem;
 }
 
-.btn-add:hover {
-    background-color: #369E40;
+/* === ALERTAS DE FEEDBACK === */
+#alert-container {
+  margin-top: 20px;
 }
 
-.lista-prop {
-    list-style: none;
+/* === SEÇÃO DE NOTIFICAÇÕES === */
+.notifications-section {
+  margin-top: 40px;
 }
 
-.lista-prop li {
-    padding: 6px 0;
-    border-bottom: 1px solid #ddd;
-    font-size: 15px;
+.notifications-section h2 {
+  color: var(--green);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Coluna de notificações */
-.coluna-notificacoes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#notifications-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.notificacoes {
-    background-color: #FFFFFF;
-    border: 2px solid #41A533;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 20px 25px;
-    width: 260px;
-    text-align: left;
+.notification-card {
+  background: var(--white);
+  border-left: 5px solid var(--green-light);
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
 }
 
-.notificacoes h2 {
-    color: #41A533;
-    margin-bottom: 10px;
+.notification-card p {
+  margin: 0;
+}
+
+.notification-time {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 5px;
+  display: block;
+}
+
+/* === SEÇÃO DE PROPRIEDADES === */
+.properties-section {
+  margin-top: 40px;
+}
+
+.properties-section h2 {
+  color: var(--green);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Grid de propriedades */
+#properties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* Card de propriedade */
+.property-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.property-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.property-info {
+  padding: 20px;
+}
+
+.property-info h3 {
+  margin: 0 0 5px 0;
+  color: var(--text);
+}
+
+.property-info p {
+  color: #777;
+  margin: 0 0 15px 0;
+}
+
+/* Botão dentro do card */
+.btn-card {
+  background: var(--green);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: 0.2s;
+}
+
+.btn-card:hover {
+  background: #276131;
+}
+
+/* Card especial para "Adicionar Nova Propriedade" */
+.add-new-card {
+  border: 3px dashed #cfe3cf;
+  background: transparent;
+  box-shadow: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #a0a0a0;
+  min-height: 280px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+}
+
+.add-new-card:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: #f6f9f6;
+}
+
+.add-new-content {
+  text-align: center;
+}
+
+.add-new-content i {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.add-new-content p {
+  font-weight: 600;
+  font-size: 1.1rem;
 }

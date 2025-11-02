@@ -1,0 +1,253 @@
+:root {
+  --green: #41A533;
+  --green-light: #65c257;
+  --bg: #f6f9f6;
+  --white: #ffffff;
+  --text: #1e1e1e;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Corpo da página */
+.dashboard-body {
+  background: var(--bg);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+  width: 260px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-sidebar {
+  width: 120px;
+  display: block;
+  margin: 0 auto;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.15s;
+}
+
+.nav-link:hover {
+  background: var(--bg);
+  color: var(--green);
+}
+
+.nav-link.active {
+  background: var(--green-light);
+  color: var(--white);
+}
+
+.nav-link i {
+  font-size: 1.1rem;
+}
+
+.nav-link.logout {
+  margin-top: auto;
+  color: #b54141;
+}
+
+.nav-link.logout:hover {
+  color: #b54141;
+  background: transparent;
+}
+
+/* === CONTEÚDO PRINCIPAL === */
+.main-content {
+  flex-grow: 1;
+  padding: 28px 32px;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+/* Cabeçalho */
+.main-header {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e9efe9;
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: var(--text);
+}
+
+.main-header p {
+  color: #666;
+  margin-top: 6px;
+}
+
+/* Área do perfil */
+.profile-area {
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+/* Cartão do perfil */
+.profile-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+/* HEADER DO PERFIL */
+.profile-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--green);
+  background: #f3f5f3;
+}
+
+.profile-email {
+  color: #666;
+  margin-top: 6px;
+}
+
+.profile-divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 18px 0;
+}
+
+/* Detalhes - grid */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.details-grid div {
+  background: #fbfffb;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #eef7ee;
+}
+
+.details-grid label {
+  font-weight: 700;
+  color: var(--green);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.details-grid p {
+  margin: 0;
+  color: var(--text);
+}
+
+/* Ações */
+.profile-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background-color: var(--green);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.15s;
+}
+
+.btn:hover { background-color: #2f7f2b; }
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--green);
+  color: var(--green);
+}
+
+.btn-outline:hover {
+  background: var(--green);
+  color: white;
+}
+
+/* FORM EDIT */
+.form-grid-2-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.form-grid-2-cols label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d8e7d8;
+  border-radius: 8px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+input:focus {
+  border-color: var(--green);
+  outline: none;
+  box-shadow: 0 0 6px rgba(65,165,51,0.12);
+}

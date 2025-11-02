@@ -1,19 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meu Perfil - Agrônomo</title>
+  <title>Meu Perfil</title>
 
-  <link rel="stylesheet" href="/css/indexPages/AGR/perfilAgronomo.css" />
+  <link rel="stylesheet" href="{% static 'css/perfilAgronomo.css' %}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <script src="{% static 'js/indexAgronomo.js' %}" defer></script>
 </head>
 <body class="dashboard-body">
 
   <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar">
     <div id="sidebar-header" class="sidebar-header">
-      <img src="/images/logoMeta.png" alt="Metaphyta" class="logo-sidebar" id="logo-sidebar">
+      <img src="{% static 'images/logoMeta.png' %}" alt="Metaphyta" class="logo-sidebar" id="logo-sidebar">
     </div>
 
     <nav id="sidebar-nav" class="sidebar-nav">
@@ -21,7 +23,7 @@
         <i class="fas fa-home"></i>
         <span>Início</span>
       </a>
-      <a href="#" class="nav-link active" id="link-dashboard">
+      <a href="{% url 'perfilAgronomo' %}" class="nav-link active" id="link-perfil">
         <i class="fas fa-user-tie"></i>
         <span>Meu Perfil</span>
       </a>
@@ -29,7 +31,7 @@
         <i class="fas fa-users"></i>
         <span>Clientes</span>
       </a>
-      <a href="#" class="nav-link logout" id="link-logout">
+      <a href="{% url 'logout' %}" class="nav-link logout" id="link-logout">
         <i class="fas fa-sign-out-alt"></i>
         <span>Sair</span>
       </a>
@@ -46,20 +48,28 @@
     </header>
 
     <!-- Alertas de feedback -->
-    <div id="alert-container">
-      <!-- Exemplo: <div class="alert alert-success">Operação realizada com sucesso!</div> -->
-    </div>
+    {% if messages %}
+      <div id="alert-container">
+        {% for message in messages %}
+          <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
 
     <!-- Conteúdo do perfil -->
     <section class="profile-area">
       <div class="profile-card">
+
         <!-- Modo de visualização -->
         <div id="view-mode">
           <div class="profile-header">
-            <img src="images/avatar-agronomo.png" alt="Foto do Perfil" class="profile-avatar">
+            <img 
+              src="{% if usuario.foto %}{{ usuario.foto.url }}{% else %}{% static 'images/avatar-agronomo.png' %}{% endif %}" 
+              alt="Foto do Perfil" 
+              class="profile-avatar">
             <div>
-              <h2 id="view-nome">João Silva</h2>
-              <p id="view-email" class="profile-email">joao.silva@email.com</p>
+              <h2 id="view-nome">{{ usuario.nome }} {{ usuario.sobrenome }}</h2>
+              <p id="view-email" class="profile-email">{{ usuario.email }}</p>
             </div>
           </div>
 
@@ -68,18 +78,18 @@
           <div class="profile-details">
             <h3>Informações Profissionais</h3>
             <div class="details-grid">
-              <div><label>CREA</label><p id="view-crea">12345-6/SC</p></div>
+              <div><label>CREA</label><p id="view-crea">{{ usuario.num_crea }}</p></div>
             </div>
           </div>
 
           <div class="profile-details">
             <h3>Informações Pessoais</h3>
             <div class="details-grid">
-              <div><label>Nome:</label><p id="view-nomeCompleto">João</p></div>
-              <div><label>Sobrenome:</label><p id="view-sobrenome">Silva</p></div>
-              <div><label>Data de Nascimento:</label><p id="view-dataNascimento">12/03/1990</p></div>
-              <div><label>CPF:</label><p id="view-cpf">000.111.222-33</p></div>
-              <div><label>Telefone:</label><p id="view-telefone">(49) 99999-9999</p></div>
+              <div><label>Nome:</label><p id="view-nomeCompleto">{{ usuario.nome }}</p></div>
+              <div><label>Sobrenome:</label><p id="view-sobrenome">{{ usuario.sobrenome }}</p></div>
+              <div><label>Data de Nascimento:</label><p id="view-dataNascimento">{{ usuario.data_nascimento|date:"d/m/Y" }}</p></div>
+              <div><label>CPF:</label><p id="view-cpf">{{ usuario.cpf }}</p></div>
+              <div><label>Telefone:</label><p id="view-telefone">{{ usuario.telefone }}</p></div>
             </div>
           </div>
           
@@ -91,38 +101,45 @@
 
         <!-- Modo de edição -->
         <div id="edit-mode" style="display: none;">
-          <form id="profileForm" method="POST">
+          <form id="profileForm" method="POST" enctype="multipart/form-data" action="{% url 'atualizar_perfil_agronomo' %}">
+            {% csrf_token %}
             <h3>Editando Perfil</h3>
+
             <div class="form-grid-2-cols">
               <div>
                 <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" value="João">
+                <input type="text" id="nome" name="nome" value="{{ usuario.nome }}">
               </div>
               <div>
                 <label for="sobrenome">Sobrenome:</label>
-                <input type="text" id="sobrenome" name="sobrenome" value="Silva">
+                <input type="text" id="sobrenome" name="sobrenome" value="{{ usuario.sobrenome }}">
               </div>
               <div>
                 <label for="dataNascimento">Data de Nascimento:</label>
-                <input type="date" id="dataNascimento" name="dataNascimento" value="1990-03-12">
+                <input type="date" id="dataNascimento" name="dataNascimento" value="{{ usuario.data_nascimento|date:'Y-m-d' }}">
               </div>
               <div>
                 <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" name="cpf" value="000.111.222-33">
+                <input type="text" id="cpf" name="cpf" value="{{ usuario.cpf }}" readonly>
               </div>
               <div>
                 <label for="telefone">Telefone:</label>
-                <input type="tel" id="telefone" name="telefone" value="(49) 99999-9999">
+                <input type="tel" id="telefone" name="telefone" value="{{ usuario.telefone }}">
               </div>
               <div>
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" value="joao.silva@email.com">
+                <input type="email" id="email" name="email" value="{{ usuario.email }}">
               </div>
               <div>
                 <label for="num_crea">CREA:</label>
-                <input type="text" id="num_crea" name="num_crea" value="12345-6/SC">
+                <input type="text" id="num_crea" name="num_crea" value="{{ usuario.num_crea }}" readonly>
+              </div>
+              <div>
+                <label for="foto">Foto de Perfil:</label>
+                <input type="file" id="foto" name="foto" accept="image/*">
               </div>
             </div>
+
             <div class="profile-actions">
               <button type="submit" class="btn"><i class="fas fa-save"></i> Salvar Alterações</button>
               <button type="button" id="btn-cancel" class="btn btn-outline">Cancelar</button>
