@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from usuarios.models import UsuarioAgronomo, UsuarioProdutor  # importa do teu app de login
+from usuarios.models import UsuarioAgronomo, UsuarioProdutor
+from main_pages.models import FotoPerfil
 
 def pagina_inicial_agronomo(request):
     if request.session.get('usuario_tipo') != 'agronomo':
@@ -70,4 +71,45 @@ def pagina_inicial_produtor(request):
     return render(request, "indexProdutor.html", context)
 
 def perfilAgronomo(request):
-    return render(request, 'perfilAgronomo.html')
+    if request.session.get('usuario_tipo') != 'agronomo':
+        messages.error(request, "Acesso restrito a contas de agrônomo.")
+        return redirect('/')
+
+    crea = request.session.get('usuario_crea')
+
+    try:
+        usuario = UsuarioAgronomo.objects.get(num_crea=crea)
+    except UsuarioAgronomo.DoesNotExist:
+        messages.error(request, "Agrônomo não encontrado.")
+        return redirect('/')
+
+    foto = FotoPerfil.objects.filter(agronomo=usuario).first()
+
+    context = {
+        "usuario": usuario,
+        "foto": foto
+    }
+
+    return render(request, "perfilAgronomo.html", context)
+
+def perfilProdutor(request):
+    if request.session.get('usuario_tipo') != 'produtor':
+        messages.error(request, "Acesso restrito a contas de produtor.")
+        return redirect('/')
+
+    cpf = request.session.get('usuario_cpf')
+    
+    try:
+        produtor = UsuarioProdutor.objects.get(cpf=cpf)
+    except UsuarioProdutor.DoesNotExist:
+        messages.error(request, "Produtor não encontrado.")
+        return redirect('/')
+
+    foto = FotoPerfil.objects.filter(produtor=produtor).first()
+
+    context = {
+        "produtor": produtor,
+        "foto": foto,
+    }
+
+    return render(request, "perfilProdutor.html", context)

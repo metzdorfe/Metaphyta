@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meu Perfil — Produtor</title>
+
+  <link rel="stylesheet" href="{% static 'css/perfilProdutor.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <script src="{% static 'js/perfilProdutor.js' %}" defer></script>
+</head>
+<body class="dashboard-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="{% static 'images/logoMeta.png' %}" alt="Metaphyta" class="logo-sidebar">
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="{% url 'paginaInicialProdutor' %}" class="nav-link">
+        <i class="fas fa-home"></i>
+        <span>Início</span>
+      </a>
+      <a href="" class="nav-link active">
+        <i class="fas fa-user"></i>
+        <span>Meu Perfil</span>
+      </a>
+      <a href="#" class="nav-link">
+        <i class="fas fa-seedling"></i>
+        <span>Cultivos</span>
+      </a>
+      <a href="/logout" class="nav-link logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Sair</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="main-content">
+
+    <header class="main-header">
+      <h1>Meu Perfil</h1>
+      <p>Gerencie suas informações pessoais e de acesso.</p>
+    </header>
+
+    {% if messages %}
+      <div id="alert-container">
+        {% for message in messages %}
+          <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <section class="profile-area">
+
+      <!-- FOTO + NOME + EMAIL -->
+      <div class="profile-header">
+        <img
+          src="{{ foto.foto.url }}"
+          alt="Foto do Perfil"
+          class="profile-avatar"
+        >
+
+        <div>
+          <h2 id="view-nome">{{ produtor.nome }} {{ produtor.sobrenome }}</h2>
+          <p class="profile-email">{{ produtor.email }}</p>
+        </div>
+      </div>
+
+      <hr class="profile-divider">
+
+      <!-- INFORMAÇÕES PESSOAIS -->
+      <div class="profile-details">
+        <h3>Informações Pessoais</h3>
+
+        <div class="details-grid">
+
+          <div>
+            <label>Nome:</label>
+            <p>{{ produtor.nome }}</p>
+          </div>
+
+          <div>
+            <label>Sobrenome:</label>
+            <p>{{ produtor.sobrenome }}</p>
+          </div>
+
+          <div>
+            <label>CPF:</label>
+            <p>{{ produtor.cpf }}</p>
+          </div>
+
+          <div>
+            <label>Email:</label>
+            <p>{{ produtor.email }}</p>
+          </div>
+
+          <div>
+            <label>Telefone:</label>
+            <p>{{ produtor.telefone }}</p>
+          </div>
+
+          <div>
+            <label>Data de Nascimento:</label>
+            <p>{{ produtor.data_nascimento|date:"d/m/Y" }}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- AÇÕES -->
+      <div class="profile-actions">
+        <button class="btn"><i class="fas fa-pencil-alt"></i> Editar Perfil</button>
+        <button class="btn btn-outline">Alterar Senha</button>
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>

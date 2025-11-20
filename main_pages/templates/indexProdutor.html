@@ -7,93 +7,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial - Produtor</title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/indexProdutor.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="{% static 'js/indexProdutor.js' %}"></script>
 </head>
+
 <body class="dashboard-body">
 
-  <!-- SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside id="sidebar" class="sidebar">
         <div id="sidebar-header" class="sidebar-header">
             <img src="{% static 'images/logoMeta.png' %}" alt="Metaphyta" class="logo-sidebar" id="logo-sidebar">
         </div>
 
         <nav id="sidebar-nav" class="sidebar-nav">
-        <a href="#" class="nav-link active" id="link-dashboard">
-            <i class="fas fa-home"></i>
-            <span>Início</span>
-        </a>
-        <a href="#" class="nav-link" id="link-perfil">
-            <i class="fas fa-user"></i>
-            <span>Meu Perfil</span>
-        </a>
-        <a href="#" class="nav-link" id="link-cultivos">
-            <i class="fas fa-seedling"></i>
-            <span>Cultivos</span>
-        </a>
-        <a href="/logout" class="nav-link logout" id="link-logout">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Sair</span>
-        </a>
+            <a href="#" class="nav-link active" id="link-dashboard">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </a>
+
+            <a href="{% url 'perfilProdutor' %}" class="nav-link" id="link-perfil">
+                <i class="fas fa-user"></i>
+                <span>Meu Perfil</span>
+            </a>
+
+            <a href="#" class="nav-link" id="link-cultivos">
+                <i class="fas fa-seedling"></i>
+                <span>Cultivos</span>
+            </a>
+
+            <a href="" class="nav-link logout" id="link-logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sair</span>
+            </a>
         </nav>
     </aside>
 
-  <!-- CONTEÚDO PRINCIPAL -->
-  <main id="main-content" class="main-content">
+    <main id="main-content" class="main-content">
 
-    <!-- Cabeçalho -->
-    <header id="main-header" class="main-header">
-    <h1>Olá, <span id="nomeProdutor">{{ nome }}</span></h1>
-    <p>Seja bem-vindo de volta!</p>
-    </header>
+        <header id="main-header" class="main-header">
+            <h1>Olá, <span id="nomeProdutor">{{ nome }}</span></h1>
+            <p>Seja bem-vindo de volta!</p>
+        </header>
 
-    <!-- Alertas de feedback -->
-    <div id="alert-container"></div>
+        <div id="alert-container"></div>
 
-    <!-- Notificações -->
-    <section id="notifications-section" class="notifications-section">
-    <h2><i class="fas fa-bell"></i> Notificações</h2>
-    <div id="notifications-container">
-        {% if notificacoes %}
-            {% for notif in notificacoes %}
-                <div class="notification-card">
-                    <p>{{ notif.texto }}</p>
-                    <span class="notification-time">{{ notif.tempo }}</span>
-                </div>
-            {% endfor %}
-        {% else %}
-            <div class="notification-card">
-                <p>Tudo tranquilo, sem notificações novas.</p>
+        <section id="notifications-section" class="notifications-section">
+            <h2><i class="fas fa-bell"></i> Notificações</h2>
+
+            <div id="notifications-container">
+                {% if notificacoes %}
+                    {% for notif in notificacoes %}
+                        <div class="notification-card">
+                            <p>{{ notif.texto }}</p>
+                            <span class="notification-time">{{ notif.tempo }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="notification-card">
+                        <p>Tudo tranquilo, sem notificações novas.</p>
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
-    </div>
-    </section>
+        </section>
 
-    <!-- Propriedades -->
-    <section id="properties-section" class="properties-section">
-        <h2><i class="fas fa-map-marker-alt"></i> Minhas Propriedades</h2>
-        <div id="properties-grid" class="properties-grid">
-            {% for prop in propriedades %}
-            <div class="property-card">
-                <div class="property-info">
-                <h3>{{ prop.nome }}</h3>
-                <p>{{ prop.local }}</p>
-                </div>
+        <section id="properties-section" class="properties-section">
+            <h2><i class="fas fa-map-marker-alt"></i> Minhas Propriedades</h2>
+
+            <div id="properties-grid" class="properties-grid">
+
+                {% for prop in propriedades %}
+                    <div class="property-card">
+                        <div class="property-info">
+                            <h3>{{ prop.nome }}</h3>
+                            <p>{{ prop.local }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <!-- Botão Adicionar -->
+                <a href="#" id="btn-add-property" class="property-card add-new-card">
+                    <div class="add-new-content">
+                        <i class="fas fa-plus"></i>
+                        <p>+ Adicionar Nova Propriedade</p>
+                    </div>
+                </a>
             </div>
-            {% endfor %}
+        </section>
+    </main>
 
-            <!-- Botão de adicionar nova propriedade -->
-            <a href="#" id="btn-add-property" class="property-card add-new-card">
-            <div class="add-new-content">
-                <i class="fas fa-plus"></i>
-                <p>+ Adicionar Nova Propriedade</p>
-            </div>
-            </a>
-        </div>
-    </section>
-  </main>
+    <script src="{% static 'main_pages/js/indexProdutor.js' %}"></script>
 
-  <script src="{% static 'main_pages/js/indexProdutor.js' %}"></script>
 </body>
 </html>

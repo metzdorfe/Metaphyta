@@ -13,7 +13,6 @@
 </head>
 <body class="dashboard-body">
 
-  <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar">
     <div id="sidebar-header" class="sidebar-header">
       <img src="{% static 'images/logoMeta.png' %}" alt="Metaphyta" class="logo-sidebar" id="logo-sidebar">
@@ -32,23 +31,20 @@
             <i class="fas fa-users"></i>
             <span>Clientes</span>
         </a>
-        <a href="/" class="nav-link logout" id="link-logout">
+        <a href="" class="nav-link logout" id="link-logout">
             <i class="fas fa-sign-out-alt"></i>
             <span>Sair</span>
         </a>
     </nav>
   </aside>
 
-  <!-- CONTEÚDO PRINCIPAL -->
   <main id="main-content" class="main-content">
 
-    <!-- Cabeçalho -->
     <header id="main-header" class="main-header">
         <h1>Olá, <span id="nomeAgronomo">{{ nome }}</span></h1>
         <p>Acompanhe seus clientes e atividades.</p>
     </header>
 
-    <!-- Alertas -->
     <div id="alert-container">
         {% if messages %}
             {% for message in messages %}
@@ -57,7 +53,6 @@
         {% endif %}
     </div>
 
-    <!-- Seção de Notificações -->
     <section id="notifications-section" class="notifications-section">
         <h2><i class="fas fa-bell"></i> Notificações</h2>
         <div id="containerNotificacoes">
@@ -76,7 +71,6 @@
         </div>
     </section>
 
-    <!-- Seção de Clientes -->
     <section id="clients-section" class="clients-section">
         <h2><i class="fas fa-users"></i> Meus Clientes</h2>
 
@@ -92,7 +86,6 @@
             </div>
             {% endfor %}
 
-        <!-- Card de novo cliente -->
         <a href="#" id="btn-add-client" class="client-card add-new-card">
           <div class="add-new-content">
             <i class="fas fa-user-plus"></i>

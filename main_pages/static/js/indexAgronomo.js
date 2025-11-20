@@ -11,16 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
     containerNotificacoes.appendChild(msg);
   }
 
-  // Botão Adicionar Cliente
-  const btnAddClient = document.getElementById("btn-add-client");
-  if (btnAddClient) {
-    btnAddClient.addEventListener("click", (e) => {
-      e.preventDefault();
-      alert("Aqui você poderá abrir um modal ou redirecionar para cadastro de cliente.");
-      // Exemplo: window.location.href = "/novo_cliente/";
-    });
-  }
-
   // Sidebar Interatividade
   const navLinks = document.querySelectorAll(".nav-link");
   navLinks.forEach(link => {
