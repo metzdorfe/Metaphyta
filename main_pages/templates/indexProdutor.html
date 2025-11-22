@@ -79,14 +79,15 @@
                 {% for prop in propriedades %}
                     <div class="property-card">
                         <div class="property-info">
-                            <h3>{{ prop.nome }}</h3>
-                            <p>{{ prop.local }}</p>
+                            <h3>{{ prop.nome_propriedade }}</h3>
+                            <p>{{ prop.endereco }} - {{ prop.uf }}</p>
                         </div>
                     </div>
+                {% empty %}
+                    <p>Nenhuma propriedade cadastrada ainda.</p>
                 {% endfor %}
 
-                <!-- Botão Adicionar -->
-                <a href="#" id="btn-add-property" class="property-card add-new-card">
+                <a href="{% url 'addPropriedade' %}" id="btn-add-property" class="property-card add-new-card">
                     <div class="add-new-content">
                         <i class="fas fa-plus"></i>
                         <p>+ Adicionar Nova Propriedade</p>

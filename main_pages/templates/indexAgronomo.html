@@ -75,24 +75,37 @@
         <h2><i class="fas fa-users"></i> Meus Clientes</h2>
 
         <div id="clients-grid" class="clients-grid">
+
             {% for c in clientes %}
             <div class="client-card">
-            <img src="{% static 'images/user.png' %}" alt="Cliente" class="client-photo">
-            <div class="client-info">
-                <h3>{{ c.nome }}</h3>
-                <p>Propriedade: {{ c.propriedade }}</p>
-                <a href="#" class="btn-card">Ver Detalhes</a>
-            </div>
+
+                <img 
+                    src="{{ c.foto.foto.url }}" 
+                    alt="Foto do Cliente" 
+                    class="client-photo"
+                >
+
+                <div class="client-info">
+                    <h3>{{ c.cliente.nome }} {{ c.cliente.sobrenome }}</h3>
+
+                    {% if c.propriedades %}
+                        <p><strong>Propriedades:</strong></p>
+                        <ul>
+                            {% for p in c.propriedades %}
+                                <li>{{ p.nome_propriedade }} – {{ p.uf }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Nenhuma propriedade cadastrada.</p>
+                    {% endif %}
+
+                    <a href="#" class="btn-card">Ver Detalhes</a>
+                </div>
+
             </div>
             {% endfor %}
 
-        <a href="#" id="btn-add-client" class="client-card add-new-card">
-          <div class="add-new-content">
-            <i class="fas fa-user-plus"></i>
-            <p>+ Adicionar Novo Cliente</p>
-          </div>
-        </a>
-      </div>
+        </div>
     </section>
   </main>
 

@@ -136,6 +136,5 @@ def cadastro(request):
 
     return render(request, 'cadastro.html')
 
-# RECUPERAÇÃO DE SENHA
 def recSenha(request):
     return render(request, 'recuperarSenha.html')

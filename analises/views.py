@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-# Create your views here.
+def addPropriedade(request):
+    return render(request, 'addPropriedade.html')
+
+def propriedade(request):
+    return render(request, 'propriedade.html',)
+
+
+def addTalhao(request):
+    return render(request, 'addTalhao.html')
+
+
+def addAnalise(request):
+    return render(request, 'addAnalise.html')

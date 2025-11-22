@@ -1,0 +1,120 @@
+:root {
+  --green: #41A533;
+  --green-light: #65c257;
+  --bg: #f6f9f6;
+  --white: #ffffff;
+  --text: #1e1e1e;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+}
+
+/* CONTAINER */
+.container {
+  width: 92%;
+  max-width: 520px;        /* DIMINUI PARA CABER SEM SCROLL */
+  margin: 22px auto;       /* REDUZ O ESPAÇAMENTO SUPERIOR */
+  background: var(--white);
+  padding: 20px;           /* REDUZ O PADDING */
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+/* TÍTULOS */
+h1 {
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 16px;
+}
+
+/* LINK VOLTAR */
+a {
+  text-decoration: none;
+  color: var(--green);
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+a:hover {
+  color: var(--green-light);
+}
+
+/* FIELDSET */
+fieldset {
+  border: 2px solid #d8e8d8;
+  border-radius: 12px;
+  padding: 14px;           /* REDUZIDO */
+  margin-bottom: 18px;     /* REDUZIDO */
+  background: #fdfdfd;
+}
+
+legend {
+  padding: 0 8px;
+  font-size: 1rem;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* GRUPOS */
+fieldset div {
+  margin-bottom: 14px;     /* REDUZIDO */
+  display: flex;
+  flex-direction: column;
+}
+
+/* LABELS */
+label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+/* INPUTS */
+input, select {
+  padding: 10px 12px;      /* REDUZIDO */
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: .2s;
+}
+
+input:focus, select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(65,165,51,0.25);
+}
+
+/* BOTÃO */
+button {
+  width: 100%;
+  padding: 12px;           /* REDUZIDO */
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: .2s;
+}
+
+button:hover {
+  background: var(--green-light);
+  transform: translateY(-2px);
+}
